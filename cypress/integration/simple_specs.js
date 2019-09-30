@@ -3,7 +3,7 @@ describe('Los estudiantes login', function() {
 		cy.visit('https://losestudiantes.co')
 		cy.contains('Cerrar').click()
 		// Lineas nuevas
-		
+		cy.screenshot('Ingreso erroneo - antes')
 		cy.contains('Ingresar').click()
 		cy.get('.cajaLogIn').find('input[name="correo"]').click().type("wrongemail@example.com")
 		cy.get('.cajaLogIn').find('input[name="password"]').click().type("1234")
@@ -11,6 +11,7 @@ describe('Los estudiantes login', function() {
 		cy.contains('El correo y la contraseña que ingresaste no figuran en la base de datos. Intenta de nuevo por favor.')
 		//cerrar ventana de inicio de sesión
 		cy.get('.cajaLogIn').find('input[name="password"]').click().type('{esc}')
+		cy.screenshot('Ingreso erroneo - despues')
 
 		// Cree una cuenta  Registro exitoso!
 		/*
@@ -28,10 +29,12 @@ describe('Los estudiantes login', function() {
 		*/
 
 		//pruebe el login correcto
+		cy.screenshot('Ingreso correcto - antes')
 		cy.contains('Ingresar').click()
 		cy.get('.cajaLogIn').find('input[name="correo"]').click().type("jc.mojicap@uniandes.edu.co")
 		cy.get('.cajaLogIn').find('input[name="password"]').click().type("myPassword123")
 		cy.get('.cajaLogIn').contains('Ingresar').click()
+		cy.screenshot('Ingreso correcto - despues')
 
 		//Cerrar sesión
 		cy.get('#cuenta').click()
@@ -40,6 +43,7 @@ describe('Los estudiantes login', function() {
 
 
 		// la creación de una cuenta con un login que ya existe		
+		cy.screenshot('Creacion cuenta - antes')
 		cy.contains('Ingresar').click()
 		cy.get('.cajaSignUp').find('input[name="nombre"]').click().type("Juan")
 		cy.get('.cajaSignUp').find('input[name="apellido"]').click().type("Mojica")
@@ -51,6 +55,7 @@ describe('Los estudiantes login', function() {
 		cy.get('.cajaSignUp').contains('Registrarse').click()
 		cy.contains('Ocurrió un error activando tu cuenta')
 		cy.contains('Ok').click()
+		cy.screenshot('Creacion cuenta - despues')
 		//cerrar ventana de inicio de sesión
 		cy.get('.cajaLogIn').find('input[name="password"]').click().type('{esc}')
 		
